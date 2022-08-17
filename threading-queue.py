@@ -26,26 +26,6 @@ class MessagingThread(threading.Thread):
         #Passed into the thread
         raise NotImplemented()
 
-class Receiver(MessagingThread):
-    def run(self) -> None:
-        for i in range(100):
-            sender, num = self.read()
-            logging.info("Receiver read %s", num)
-
-
-class Sender(threading.Thread):
-
-    def __init__(self, id: int, receiver: Receiver) -> None:
-        self.receiver: Receiver = receiver
-        self.id = id
-        super().__init__(target=lambda x: self.run())
-
-    def run(self) -> None:
-        for _ in range(100):
-            num = random.randint(0, 1000)
-            self.receiver.send(self.id, num)
-            logging.info("Sender sent %s", num)
-
 class VotingThread(MessagingThread):
     peers: Iterable[MessagingThread]
 
