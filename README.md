@@ -29,11 +29,12 @@ Looking Back At the initial attempt:
 2. Need to pay attention to the handoff between the threads (e.g. the moment where one thread drops and the other is picked up) - Locking helped with this
 3. My initial Solution for Part 1. used a list acting as a queue
     - Since we're only really sending a value back and forth, just changed that to a read/write on a value and it was a good opportunity to use locks and tackle the classic Producer-Consumer Problem
+4. For Part 2. Understanding that a Queue implements *most* of the lock handling would have been useful, but I'm glad I implemented it with a list / value anyway to start
     
 Remaining Issues:
 1. The queue solution works great when `QUEUE_SIZE` and `THREAD_SIZE` are both `3`, but it encounters a deadlock occasionally at `10`
-  - This is due to the fact that there is a chance that the thread sends out all of the values to all of its peers but does not neccesarily have a queue to read from once it's finished (e.g. it's own queue could still be empty)
-  - I think I can solve this with some more clever Event handling, but I'll need a little bit more time for that!
+    - This is due to the fact that there is a chance that the thread sends out all of the values to all of its peers but does not neccesarily have a queue to read from once it's finished (e.g. it's own queue could still be empty)
+    - I think I can solve this with some more clever Event handling, but I'll need a little bit more time for that!
 
 
 HW:
