@@ -1,12 +1,11 @@
 import logging
-import queue
 import random
 import threading
 
 
 class MessagingThread(threading.Thread):
     id: int
-    bucket: queue.Queue
+    bucket: list
 
     def __init__(self, id: int) -> None:
         super().__init__(target=lambda x: self.run())
@@ -21,18 +20,18 @@ class MessagingThread(threading.Thread):
         self.condition_lock.release()
 
     def read(self) -> int:
-        self.condition_lock.acquire()
         while True:
             try:
                 value = self.bucket.pop()
                 break
             except IndexError:
+                self.condition_lock.acquire()
                 notified = self.condition_lock.wait(2)
                 if notified:
+                    self.condition_lock.release()
                     continue
                 else:
                     raise TimeoutError("Failed to get number from Queue")
-        self.condition_lock.release()
         return value
 
     def run(self) -> None:
