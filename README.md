@@ -19,6 +19,8 @@ This repository contains the following files:
     threading-intro.py -> The initial attempt at solving both Part 1 and Part 2 (i.e. during intro conversation)
     
     threading-single.py -> A second attempt at tackling Part 1 with a better understanding of threads + thread locking
+
+    threading-single-v2.py -> A third attempt at tackling Part 1 with a better understanding of conditions in threads to implement a queueing system
     
     threading-queue.py -> A second attempt at tackling Part 2 with a better understanding of Queues (which implement thread locking etc.)
 
