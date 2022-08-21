@@ -8,7 +8,7 @@ class MessagingThread(threading.Thread):
     bucket: list
 
     def __init__(self, id: int) -> None:
-        super().__init__(target=lambda x: self.run())
+        super().__init__()
         self.id = id
         self.condition_lock = threading.Condition()
         self.bucket = []
@@ -31,7 +31,7 @@ class MessagingThread(threading.Thread):
                     self.condition_lock.release()
                     continue
                 else:
-                    raise TimeoutError("Failed to get number from Queue")
+                    raise TimeoutError("Timed Out: Failed to get number from Queue")
         return value
 
     def run(self) -> None:
@@ -50,7 +50,7 @@ class Sender(threading.Thread):
     def __init__(self, id: int, receiver: Receiver) -> None:
         self.receiver: Receiver = receiver
         self.id = id
-        super().__init__(target=lambda x: self.run())
+        super().__init__()
 
     def run(self) -> None:
         for i in range(100):

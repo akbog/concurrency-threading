@@ -19,8 +19,7 @@ class MessagingThread(threading.Thread):
         self.fifo.put((src, x))
 
     def read(self) -> Tuple[int, int]:
-        value = self.fifo.get()
-        return value
+        return self.fifo.get()
 
     def run(self) -> None:
         #Passed into the thread
