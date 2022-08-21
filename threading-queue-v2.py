@@ -73,7 +73,7 @@ class VotingThread(MessagingThread):
             mem = {self.id : num}
             for peer in self.peers:
                 peer.send(self.id, num)
-                #These numbers can come in any order, and it is not guaranteed that all peers will sen
+                #These numbers can come in any order, and it is not guaranteed that all peers will send out before moving to the next round
                 #Because of this order, Node 1 will tend to receive numbers first + can receive all numbers before everyone else
                 #and therefore can begin sending out round 2 numbs before everyone else is finished receiving numbers
                 #need to use a hash map to store numbers corresponding to IDs so that we can be agnostic to queue order
