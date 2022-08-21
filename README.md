@@ -23,6 +23,8 @@ This repository contains the following files:
     threading-single-v2.py -> A third attempt at tackling Part 1 with a better understanding of conditions in threads to implement a queueing system
     
     threading-queue.py -> A second attempt at tackling Part 2 with a better understanding of Queues (which implement thread locking etc.)
+    
+    threading-queue-v2.py -> A third attempt at tackling Part 2 with using the single-v2 thread read/write logic & adding a dict to allow for multi-round writes to the queue
 
 Looking Back At the initial attempt:
 1. When first approaching the problem, I assumed the Sender and Receiver would have greater interaction (e.g. Sender Sends using its extended Send Method, and Reader Reads etc.)
@@ -33,7 +35,7 @@ Looking Back At the initial attempt:
     - Since we're only really sending a value back and forth, just changed that to a read/write on a value and it was a good opportunity to use locks and tackle the classic Producer-Consumer Problem
 4. For Part 2. Understanding that a Queue implements *most* of the lock handling would have been useful, but I'm glad I implemented it with a list / value anyway to start
     
-Remaining Issues:
+Resolved Issues:
 1. The queue solution works great when `QUEUE_SIZE` and `THREAD_SIZE` are both `3`, but it encounters a deadlock occasionally at `10`
     - This is due to the fact that there is a chance that the thread sends out all of the values to all of its peers but does not neccesarily have a queue to read from once it's finished (e.g. it's own queue could still be empty)
     - I think I can solve this with some more clever Event handling, but I'll need a little bit more time for that!
@@ -41,4 +43,3 @@ Remaining Issues:
 
 HW:
 1. Take a look at Paxos / Raft protocols for solving consensus
-2. Improve Part 2. to handle edge cases of thread failure etc. and resolve queue deadlock issue
